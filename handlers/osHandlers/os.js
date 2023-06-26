@@ -7,11 +7,11 @@ const handleArg = (arg) => {
         case "--cpus":
             const host_machine = cpus().map((elem)=>(
                 {
-                    model:elem.model,
+                    model: elem.model,
                     speed:`${elem.speed/1000} GHz`
                 }
             ))
-            return host_machine;
+            return [`Overall amount of CPUS: ${host_machine.length}`, ...host_machine];
         case "--homedir":
             return homedir();
         case "--username":

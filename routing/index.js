@@ -46,6 +46,14 @@ const checkArgumensNeeded = (args, length) => {
     return args.length<length ? true : false;
 }
 
+const checkArgumentOS = (arg) => {
+    let check_array = ["EOL","cpus","homedir","username","architecture"];
+    if(arg.split("--").length<1) return true;
+    else if (!check_array.includes(arg.split("--")[1])) return true;
+    return false;
+}
+
+
 
 const routing = async (line, currentDir) => {
     try{
@@ -101,6 +109,7 @@ const routing = async (line, currentDir) => {
 
             case "os":
                 if(checkArgumensNeeded(args, 1)) return setErrorStatus("Invalid input");
+                else if(checkArgumentOS(args[0])) return setErrorStatus("Invalid input");
                 await handleOS(args);
                 return setSuccessStatus();
 
